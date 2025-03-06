@@ -12,16 +12,16 @@ namespace Inventory_Management_System_WPF.ViewModels
     {
         #region Properties
         private readonly Product _product;
-        public string Name => _product.Name;
-        public ProductCategoryEnum Category => _product.Category;
-        public double Price => _product.Price;
-        public int Quantity => _product.Quantity;
+        public string Name {get; set;}
+        public ProductCategoryEnum? Category { get; set; }
+        public double Price { get; set; }
+        public int Quantity { get; set; }
         #endregion
 
         #region Constructor
-        public ProductViewModel(Product product)
+        public ProductViewModel()
         {
-            _product = product;
+
         }
         #endregion
 

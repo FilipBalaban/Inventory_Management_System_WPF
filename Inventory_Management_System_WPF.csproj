@@ -63,9 +63,11 @@
     <Compile Include="ViewModels\AddProductViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BrowseProductsViewModel.cs" />
+    <Compile Include="ViewModels\ClothingViewModel.cs" />
     <Compile Include="ViewModels\ElectronicsViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PerishableGoodsViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\RemoveProductViewModel.cs" />
     <Compile Include="Views\AddProductView.xaml.cs">

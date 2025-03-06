@@ -15,12 +15,6 @@ namespace Inventory_Management_System_WPF.ViewModels
         public double BatteryLife { get; set; }
         #endregion
 
-        public ElectronicsViewModel(Electronics product): base(product)
-        {
-            Voltage = product.Voltage;
-            BatteryLife = product.BatteryLife;
-        }
-
         #region Methods
         public override StackPanel ReturnDataStackPanel()
         {

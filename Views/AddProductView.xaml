@@ -30,7 +30,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <TextBlock Text="Name:" />
-            <TextBox Grid.Row="2" Text="{Binding Name}" />
+            <TextBox Grid.Row="2" Text="{Binding Product.Name, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!--  Price & Quantity  -->
@@ -47,16 +47,17 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Price:" />
             <TextBox
+                HorizontalAlignment="Left"
                 Grid.Row="2"
                 Width="180"
-                Text="{Binding Price}" />
+                Text="{Binding Product.Price, UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBlock Grid.Column="2" Text="Quantity:" />
             <TextBox
                 Grid.Row="2"
                 Grid.Column="2"
                 Width="180"
-                Text="{Binding Quantity}" />
+                Text="{Binding Product.Quantity, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!--  Category  -->
@@ -71,7 +72,7 @@
                 Grid.Row="2"
                 Width="180"
                 HorizontalAlignment="Left"
-                ItemsSource="{Binding Category}" />
+                ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Top" />
         </Grid>
 
         <!--  Product Content Control  -->
@@ -86,7 +87,7 @@
                 <ColumnDefinition Width="24" />
                 <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding AddProductCommand}" Content="Add product" />
+            <Button Command="{Binding AddCommand}" Content="Add product" />
             <Button
                 Grid.Column="2"
                 Command="{Binding CancelCommand}"

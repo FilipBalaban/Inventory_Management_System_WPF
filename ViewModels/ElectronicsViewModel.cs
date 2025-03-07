@@ -5,62 +5,121 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Inventory_Management_System_WPF.ViewModels
 {
     public class ElectronicsViewModel : ProductViewModel
     {
+        #region Fields
+        private double? _voltage;
+        private double? _batteryLife;
+        #endregion
+
         #region Properites
-        public double Voltage { get; set; }
-        public double BatteryLife { get; set; }
+        public double? Voltage
+        {
+            get => _voltage;
+            set
+            {
+                _voltage = value;
+                CheckFilledProperties();
+            }
+        }
+
+        public double? BatteryLife
+        {
+            get => _batteryLife;
+            set
+            {
+                _batteryLife = value;
+                CheckFilledProperties();
+            }
+        }
+
         #endregion
 
         #region Methods
         public override StackPanel ReturnDataStackPanel()
         {
             throw new NotImplementedException();
-
-            TextBlock voltageBlock = new TextBlock
-            {
-                Text = "Voltage"
-            };
-            TextBox voltageBox = new TextBox();
-
-            TextBlock batteryBlock = new TextBlock
-             {
-                 Text = "Battery life"
-             };
-            TextBox batteryBox = new TextBox();
-
-            StackPanel verticalStackPanel1 = new StackPanel
-            {
-                Orientation = Orientation.Vertical
-            };
-            StackPanel verticalStackPanel2 = new StackPanel
-            {
-                Orientation = Orientation.Vertical
-            };
-
-            verticalStackPanel1.Children.Add(voltageBlock);
-            verticalStackPanel1.Children.Add(voltageBox);
-            verticalStackPanel2.Children.Add(batteryBlock);
-            verticalStackPanel2.Children.Add(batteryBox);
-
-            Grid grid = new Grid();
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
-            grid.Children.Add(verticalStackPanel1);
-            grid.Children.Add(verticalStackPanel2);
         }
 
         public override List<string> ReturnGridViewData()
         {
             throw new NotImplementedException();
         }
-
+        
         public override StackPanel ReturnStackPanel()
         {
-            throw new NotImplementedException();
+            TextBlock voltageBlock = new TextBlock
+            {
+                Text = "Voltage"
+            };
+            TextBox voltageBox = new TextBox();
+            Binding voltageBinding = new Binding("Voltage")
+            {
+                Source = this,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger=UpdateSourceTrigger.PropertyChanged
+            };
+            voltageBox.SetBinding(TextBox.TextProperty, voltageBinding);
+           
+            TextBlock batteryBlock = new TextBlock
+            {
+                Text = "Battery life"
+            };
+            TextBox batteryBox = new TextBox();
+            Binding batteryBinding = new Binding("BatteryLife")
+            {
+                Source = this,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            };
+            batteryBox.SetBinding(TextBox.TextProperty, batteryBinding);
+
+            // Margins
+            //voltageBlock.Margin = new System.Windows.Thickness(0, 0, 64, 8);
+            //voltageBox.Margin = new System.Windows.Thickness(0, 0, 64, 0);
+            //batteryBlock.Margin = new System.Windows.Thickness(0, 0, 0, 8);
+
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Children =
+                {
+                    new StackPanel()
+                    {
+                        Children =
+                        {
+                            voltageBlock,
+                            voltageBox,
+                        },
+                        
+                    },
+                    new StackPanel()
+                    {
+                        Children =
+                        {
+                            batteryBlock,
+                            batteryBox,
+                        },
+                    }
+                }
+            };
+            return stackPanel;
+        }
+        protected override void CheckFilledProperties()
+        {
+            base.CheckFilledProperties();
+            if(RequiredPropertiesFilled == true && _voltage.HasValue && _batteryLife.HasValue){
+                RequiredPropertiesFilled = true;
+            }
+            else
+            {
+                RequiredPropertiesFilled = false;
+            }
         }
         #endregion
     }

@@ -16,11 +16,12 @@ namespace Inventory_Management_System_WPF
     /// </summary>
     public partial class App : Application
     {
-        private readonly Inventory _inventory;
+        private Inventory _inventory;
         private NavigationStore _navigationStore = new NavigationStore();
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            _inventory = new Inventory();
             _navigationStore.CurrentViewModel = CreateMainMenuViewModel();
             MainWindow = new MainWindow()
             {
@@ -33,7 +34,7 @@ namespace Inventory_Management_System_WPF
 
         private MainMenuViewModel CreateMainMenuViewModel()
         {
-            return new MainMenuViewModel(_navigationStore, CreateAddProductViewModel, CreateRemoveProductViewModel, CreateBrowseProductsViewModel);
+            return new MainMenuViewModel(_inventory, _navigationStore, CreateAddProductViewModel, CreateRemoveProductViewModel, CreateBrowseProductsViewModel);
         }
         private AddProductViewModel CreateAddProductViewModel()
         {

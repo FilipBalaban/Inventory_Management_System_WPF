@@ -21,7 +21,9 @@ namespace Inventory_Management_System_WPF.Models
         #endregion
 
         #region Fields
-        private static int _objectCounter;
+        private static int _clothingObjectCounter;
+        private static int _electronicsObjectCounter;
+        private static int _perishableGoodsObjectCounter;
         // Could be editable UI properties in the future
         private string _name;
         private double _price;
@@ -77,7 +79,6 @@ namespace Inventory_Management_System_WPF.Models
             Price = price;
             Quantity = quantity;
             Category = category;
-            _objectCounter++;
             GenerateID();
         }
         #endregion
@@ -88,13 +89,16 @@ namespace Inventory_Management_System_WPF.Models
             switch (Category)
             {
                 case ProductCategoryEnum.PerishableGoods:
-                    ID = $"pg.{_objectCounter.ToString().PadLeft(4, '0')}";
+                    _perishableGoodsObjectCounter++;
+                    ID = $"pg.{_perishableGoodsObjectCounter.ToString().PadLeft(4, '0')}";
                     break;
                 case ProductCategoryEnum.Electronics:
-                    ID = $"el.{_objectCounter.ToString().PadLeft(4, '0')}";
+                    _electronicsObjectCounter++;
+                    ID = $"el.{_electronicsObjectCounter.ToString().PadLeft(4, '0')}";
                     break;
                 case ProductCategoryEnum.Clothing:
-                    ID = $"cl.{_objectCounter.ToString().PadLeft(4, '0')}";
+                    _clothingObjectCounter++;
+                    ID = $"cl.{_clothingObjectCounter.ToString().PadLeft(4, '0')}";
                     break;
             }
         }

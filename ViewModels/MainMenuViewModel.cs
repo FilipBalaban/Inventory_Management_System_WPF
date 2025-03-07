@@ -20,7 +20,7 @@ namespace Inventory_Management_System_WPF.ViewModels
         #endregion
 
         #region Constructor
-        public MainMenuViewModel(NavigationStore navigationStore, Func<AddProductViewModel> createAddProductVM, Func<RemoveProductViewModel> createRemoveProductVM, Func<BrowseProductsViewModel> createBrowseProductsVM)
+        public MainMenuViewModel(Inventory inventory, NavigationStore navigationStore, Func<AddProductViewModel> createAddProductVM, Func<RemoveProductViewModel> createRemoveProductVM, Func<BrowseProductsViewModel> createBrowseProductsVM)
         {
             AddProductCommand = new NavigateCommand(navigationStore, createAddProductVM);
             RemoveProductCommand = new NavigateCommand(navigationStore, createRemoveProductVM);

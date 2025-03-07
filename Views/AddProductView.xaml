@@ -42,21 +42,18 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="FirstColumn" />
-                <ColumnDefinition Width="64" />
                 <ColumnDefinition Width="auto" SharedSizeGroup="SecondColumn" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Price:" />
             <TextBox
-                HorizontalAlignment="Left"
                 Grid.Row="2"
-                Width="180"
+                HorizontalAlignment="Left"
                 Text="{Binding Product.Price, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Grid.Column="2" Text="Quantity:" />
+            <TextBlock Grid.Column="1" Text="Quantity:" />
             <TextBox
                 Grid.Row="2"
-                Grid.Column="2"
-                Width="180"
+                Grid.Column="1"
                 Text="{Binding Product.Quantity, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
@@ -71,13 +68,16 @@
             <ComboBox
                 Grid.Row="2"
                 Width="180"
+                Height="22"
                 HorizontalAlignment="Left"
-                ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Top" />
+                VerticalAlignment="Top"
+                ItemsSource="{Binding Categories}"
+                SelectedItem="{Binding SelectedCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!--  Product Content Control  -->
         <Grid Grid.Row="4" Style="{StaticResource ContentGrid}">
-            <ContentControl Content="{Binding ProductContentControl}" />
+            <ContentControl Content="{Binding DynamicProductContent}" />
         </Grid>
 
         <!--  Buttons  -->

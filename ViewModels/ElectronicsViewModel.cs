@@ -27,7 +27,6 @@ namespace Inventory_Management_System_WPF.ViewModels
                 CheckFilledProperties();
             }
         }
-
         public double? BatteryLife
         {
             get => _batteryLife;
@@ -37,7 +36,6 @@ namespace Inventory_Management_System_WPF.ViewModels
                 CheckFilledProperties();
             }
         }
-
         #endregion
 
         #region Methods
@@ -78,11 +76,6 @@ namespace Inventory_Management_System_WPF.ViewModels
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
             batteryBox.SetBinding(TextBox.TextProperty, batteryBinding);
-
-            // Margins
-            //voltageBlock.Margin = new System.Windows.Thickness(0, 0, 64, 8);
-            //voltageBox.Margin = new System.Windows.Thickness(0, 0, 64, 0);
-            //batteryBlock.Margin = new System.Windows.Thickness(0, 0, 0, 8);
 
             StackPanel stackPanel = new StackPanel
             {

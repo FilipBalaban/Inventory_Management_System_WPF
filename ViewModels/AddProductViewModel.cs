@@ -103,7 +103,7 @@ namespace Inventory_Management_System_WPF.ViewModels
             Product = new ClothingViewModel();
             
         }
-        private void OnRequiredFilledPropertiesChanged()
+        private void OnRequiredFilledPropertiesChanged() 
         {
             AddCommand = new AddProductCommand(_inventory, Product);
             RaiseOnPropertyChanged(nameof(AddCommand));

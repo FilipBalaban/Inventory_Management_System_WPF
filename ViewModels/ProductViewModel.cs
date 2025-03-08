@@ -27,7 +27,6 @@ namespace Inventory_Management_System_WPF.ViewModels
             {
                 _name = value;
                 CheckFilledProperties();
-                //RaiseOnPropertyChanged(nameof(Name));
             }
         }
         public ProductCategoryEnum? Category
@@ -37,7 +36,6 @@ namespace Inventory_Management_System_WPF.ViewModels
             {
                 _category = value;
                 CheckFilledProperties();
-                //RaiseOnPropertyChanged(nameof(Category));
             }
         }
         public double? Price
@@ -47,7 +45,6 @@ namespace Inventory_Management_System_WPF.ViewModels
             {
                 _price = value;
                 CheckFilledProperties();
-                //RaiseOnPropertyChanged(nameof(Price));
             }
         }
 
@@ -58,7 +55,6 @@ namespace Inventory_Management_System_WPF.ViewModels
             {
                 _quantity = value;
                 CheckFilledProperties();
-                //RaiseOnPropertyChanged(nameof(Quantity));
             }
         }
 
@@ -84,11 +80,6 @@ namespace Inventory_Management_System_WPF.ViewModels
         public abstract StackPanel ReturnStackPanel();
         public abstract StackPanel ReturnDataStackPanel();
         public abstract List<string> ReturnGridViewData();
-        //protected override void RaiseOnPropertyChanged(string propertyName)
-        //{
-        //    CheckFilledProperties();
-        //    base.RaiseOnPropertyChanged(propertyName);
-        //}
         protected virtual void CheckFilledProperties()
         {
             if(!string.IsNullOrEmpty(_name) && _category.HasValue && _price.HasValue && _quantity.HasValue)

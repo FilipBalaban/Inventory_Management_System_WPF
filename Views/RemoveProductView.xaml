@@ -34,7 +34,10 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="Product ID:" />
-            <TextBox Grid.Row="2" Width="350" />
+            <TextBox
+                Grid.Row="2"
+                Width="350"
+                Text="{Binding ProductIDText}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="2"

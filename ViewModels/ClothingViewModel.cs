@@ -5,8 +5,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media.Media3D;
 
 namespace Inventory_Management_System_WPF.ViewModels
 {
@@ -47,12 +49,46 @@ namespace Inventory_Management_System_WPF.ViewModels
             DisplaySize = Enum.GetValues(typeof(ClothingSizeEnum)).Cast<ClothingSizeEnum>().ToList();
             DisplayFabric = Enum.GetValues(typeof(ClothingFabricEnum)).Cast<ClothingFabricEnum>().ToList();
         }
+        public ClothingViewModel(string name, ProductCategoryEnum category, double price, int quantity, ClothingSizeEnum size, ClothingFabricEnum fabric) : base(name, category, price, quantity)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+            Quantity = quantity;
+            Size = size;
+            Fabric = fabric;
+
+            DisplaySize = Enum.GetValues(typeof(ClothingSizeEnum)).Cast<ClothingSizeEnum>().ToList();
+            DisplayFabric = Enum.GetValues(typeof(ClothingFabricEnum)).Cast<ClothingFabricEnum>().ToList();
+        }
         #endregion
 
         #region Methods
-        public override StackPanel ReturnDataStackPanel()
+        public override Grid ReturnDataGrid()
         {
-            throw new NotImplementedException();
+            Grid grid = CreateBaseDataGrid();
+            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(8) });
+            grid.RowDefinitions.Add(new RowDefinition()); // 4
+
+            // Size
+            TextBlock sizeBlock = new TextBlock()
+            {
+                Text = $"Size: {Size.ToString()}"
+            };
+            Grid.SetColumn(sizeBlock, 0);
+            Grid.SetRow(sizeBlock, 4);
+            grid.Children.Add(sizeBlock);
+
+            // Fabric
+            TextBlock fabricBlock = new TextBlock()
+            {
+                Text = $"Fabric: {Fabric.ToString()}"
+            };
+            Grid.SetColumn(fabricBlock, 2);
+            Grid.SetRow(fabricBlock, 4);
+            grid.Children.Add(fabricBlock);
+
+            return grid;
         }
 
         public override List<string> ReturnGridViewData()

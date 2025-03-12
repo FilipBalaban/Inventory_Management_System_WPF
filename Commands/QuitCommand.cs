@@ -11,8 +11,12 @@ namespace Inventory_Management_System_WPF.Commands
     {
         public override void Execute(object parameter)
         {
-            MessageBox.Show("You have exited the application. Implement yes and no!");
-            System.Windows.Application.Current.Shutdown();
+            var result = MessageBox.Show("Are you sure that you want to quit the application?", "Quit", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+            
         }
     }
 }

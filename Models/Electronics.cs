@@ -24,7 +24,7 @@ namespace Inventory_Management_System_WPF.Models
                 {
                     throw new ProductInvalidPropertyException("Electronic product cannot have a negative voltage.");
                 }
-                _voltage = Voltage;
+                _voltage = value;
             }
         }
         public double BatteryLife
@@ -36,7 +36,7 @@ namespace Inventory_Management_System_WPF.Models
                 {
                     throw new ProductInvalidPropertyException("Electronic product cannot have a negative battery life.");
                 }
-                _batteryLife = BatteryLife;
+                _batteryLife = value;
             }
         }
         #endregion

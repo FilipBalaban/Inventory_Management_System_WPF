@@ -49,6 +49,7 @@ namespace Inventory_Management_System_WPF.Models
             get => _expirationDate;
             set
             {
+                _expirationDate = value;
                 if (value < DateTime.Now)
                 {
                     RaiseOnHasExpired();

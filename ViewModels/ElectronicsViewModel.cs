@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -38,10 +39,48 @@ namespace Inventory_Management_System_WPF.ViewModels
         }
         #endregion
 
-        #region Methods
-        public override StackPanel ReturnDataStackPanel()
+        #region Constructors
+        public ElectronicsViewModel()
         {
-            throw new NotImplementedException();
+
+        }
+        public ElectronicsViewModel(string name, ProductCategoryEnum category, double price, int quantity, double voltage, double batteryLife): base(name, category, price, quantity)
+        {
+            Name = name;
+            Category = category;
+            Price = price;
+            Quantity = quantity;
+            Voltage = voltage;
+            BatteryLife = batteryLife;
+        }
+        #endregion
+
+        #region Methods
+        public override Grid ReturnDataGrid()
+        {
+            Grid grid = CreateBaseDataGrid();
+            grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(8) });
+            grid.RowDefinitions.Add(new RowDefinition()); // 4
+
+            // Voltage
+            TextBlock voltageBlock = new TextBlock()
+            {
+                Text = $"Voltage: {Voltage.ToString()}"
+            };
+            Grid.SetColumn(voltageBlock, 0);
+            Grid.SetRow(voltageBlock, 4);
+            grid.Children.Add(voltageBlock);
+
+            // Battery Life
+            TextBlock batteryBlock = new TextBlock()
+            {
+                Text = $"Battery Life: {BatteryLife.ToString()}"
+            };
+            Grid.SetColumn(batteryBlock, 2);
+            Grid.SetRow(batteryBlock, 4);
+            grid.Children.Add(batteryBlock);
+
+            return grid;
         }
 
         public override List<string> ReturnGridViewData()
@@ -56,26 +95,24 @@ namespace Inventory_Management_System_WPF.ViewModels
                 Text = "Voltage"
             };
             TextBox voltageBox = new TextBox();
-            Binding voltageBinding = new Binding("Voltage")
+            voltageBox.SetBinding(TextBox.TextProperty, new Binding("Voltage")
             {
                 Source = this,
                 Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger=UpdateSourceTrigger.PropertyChanged
-            };
-            voltageBox.SetBinding(TextBox.TextProperty, voltageBinding);
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            });
            
             TextBlock batteryBlock = new TextBlock
             {
                 Text = "Battery life"
             };
             TextBox batteryBox = new TextBox();
-            Binding batteryBinding = new Binding("BatteryLife")
+            batteryBox.SetBinding(TextBox.TextProperty, new Binding("BatteryLife")
             {
                 Source = this,
                 Mode = BindingMode.TwoWay,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
-            };
-            batteryBox.SetBinding(TextBox.TextProperty, batteryBinding);
+            });
 
             StackPanel stackPanel = new StackPanel
             {

@@ -37,7 +37,7 @@
             <TextBox
                 Grid.Row="2"
                 Width="350"
-                Text="{Binding ProductIDText}" />
+                Text="{Binding ProductIDText, UpdateSourceTrigger=PropertyChanged}" />
             <Button
                 Grid.Row="2"
                 Grid.Column="2"
@@ -46,12 +46,12 @@
         </Grid>
 
         <!--  ProductDataContentControl  -->
-        <Grid Grid.Row="3" Style="{StaticResource ContentGrid}">
-            <ContentControl Content="{Binding ProductDataContentControl}" />
+        <Grid Grid.Row="2" Style="{StaticResource ContentGrid}">
+            <ContentControl Content="{Binding ProductDataContentControl, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!--  Buttons  -->
-        <Grid Grid.Row="5" Style="{StaticResource ContentGrid}">
+        <Grid Grid.Row="4" Style="{StaticResource ContentGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="24" />

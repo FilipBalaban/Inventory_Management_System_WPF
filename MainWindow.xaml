@@ -9,7 +9,7 @@
     xmlns:vms="clr-namespace:Inventory_Management_System_WPF.ViewModels"
     Title="MainWindow"
     Width="1000"
-    Height="450"
+    Height="650"
     mc:Ignorable="d">
 
     <Grid MaxWidth="700" VerticalAlignment="Center">

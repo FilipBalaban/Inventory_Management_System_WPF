@@ -2,10 +2,6 @@
 using Inventory_Management_System_WPF.Models;
 using Inventory_Management_System_WPF.Stores;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,16 +13,22 @@ namespace Inventory_Management_System_WPF.ViewModels
         private readonly Inventory _inventory;
         private string _productIDText;
         private UIElement _productDataContentControl;
+        private ICommand _removeProductCommand;
         #endregion
 
         #region Properties
+        public bool HasSearchBeenClicked { get; set; }
         public string ProductIDText
         {
             get => _productIDText;
             set
             {
                 _productIDText = value;
+                HasSearchBeenClicked = false;
+                SearchCommand = new SearchProductCommand(this, _inventory, value);
+                RemoveProductCommand = new RemoveProductCommand(null, null);
                 RaiseOnPropertyChanged(nameof(ProductIDText));
+                RaiseOnPropertyChanged(nameof(SearchCommand));
             }
         }
         public UIElement ProductDataContentControl
@@ -38,20 +40,32 @@ namespace Inventory_Management_System_WPF.ViewModels
                 RaiseOnPropertyChanged(nameof(ProductDataContentControl));
             }
         }
-        public ICommand SearchCommand { get; }
-        public ICommand RemoveProductCommand { get; }
+        public SearchProductCommand SearchCommand { get; private set; }
+        public ICommand RemoveProductCommand
+        {
+            get => _removeProductCommand;
+            set
+            {
+                _removeProductCommand = value;
+                if (_removeProductCommand != null)
+                {
+                    RaiseOnPropertyChanged(nameof(RemoveProductCommand));
+                }
+                
+            }
+        }
         public ICommand CancelCommand { get; }
         #endregion
 
-        #region Methods
 
-        #endregion
-
+        #region Constructor
         public RemoveProductViewModel(Inventory inventory, NavigationStore navigationStore, Func<MainMenuViewModel> createMainMenuViewModel)
         {
-            SearchCommand = new SearchProductCommand();
-            RemoveProductCommand = new RemoveProductCommand();
+            _inventory = inventory;
+            SearchCommand = new SearchProductCommand(this, _inventory, _productIDText);
+            _removeProductCommand = new RemoveProductCommand(null, _inventory);
             CancelCommand = new NavigateCommand(navigationStore, createMainMenuViewModel);
         }
+        #endregion
     }
 }

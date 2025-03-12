@@ -30,12 +30,12 @@ namespace Inventory_Management_System_WPF.Models
 
             _productDictionary.Add(product.ID, product);
         }
-        public void RemoveProduct(Product product)
+        public void RemoveProduct(string productId)
         {
-            if (!_productDictionary.ContainsKey(product.ID)){
-                throw new ProductNotInDictionaryException(product);
+            if (!_productDictionary.ContainsKey(productId)){
+                throw new ProductNotInDictionaryException(productId);
             }
-            _productDictionary.Remove(product.ID);
+            _productDictionary.Remove(productId);
         }
         public Dictionary<string, Product> GetProductDictionary(ProductCategoryEnum? category = null)
         {

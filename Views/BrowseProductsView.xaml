@@ -21,7 +21,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource Heading}" Text="BROWSE PRODUCTS" />
-            <Button Grid.Column="1" Content="Return" />
+            <Button Grid.Column="1" Content="Return" Command="{Binding ReturnCommand}" />
         </Grid>
 
         <!--  Radio Buttons  -->
@@ -30,25 +30,16 @@
                 <RadioButton
                     Margin="5,0"
                     Content="All"
-                    IsChecked="True" />
-                <RadioButton Margin="5,0" Content="Perishable Goods" />
-                <RadioButton Margin="5,0" Content="Electronics" />
-                <RadioButton Margin="5,0" Content="Clothing" />
+                    IsChecked="{Binding SelectedCategoryRadio, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=All, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Margin="5,0" Content="Perishable Goods" IsChecked="{Binding SelectedCategoryRadio, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=PerishableGoods, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Margin="5,0" Content="Electronics"  IsChecked="{Binding SelectedCategoryRadio, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Electronics, UpdateSourceTrigger=PropertyChanged}" />
+                <RadioButton Margin="5,0" Content="Clothing" IsChecked="{Binding SelectedCategoryRadio, Converter={StaticResource EnumToBoolConverter}, ConverterParameter=Clothing, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </Grid>
 
         <!--  GridView  -->
         <Grid Grid.Row="2" Style="{StaticResource ContentGrid}">
-            <ListView>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Price}" Header="Price" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Quantity}" Header="Quantity" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <ContentControl Content="{Binding DynamicListView, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
     </Grid>
 </UserControl>

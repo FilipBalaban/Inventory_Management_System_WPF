@@ -62,6 +62,7 @@
     <Compile Include="Commands\RemoveProductCommand.cs" />
     <Compile Include="Commands\SearchProductCommand.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="ValueConverters\EnumToBoolConverter.cs" />
     <Compile Include="ViewModels\AddProductViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BrowseProductsViewModel.cs" />
